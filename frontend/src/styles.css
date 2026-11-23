@@ -1,0 +1,173 @@
+/*
+ * Tailwind v4 entry: config lives here, with no tailwind.config.js or PostCSS plugin.
+ * - Keep every @import in this top block, above @theme and the rest of the file. Install an
+ *   npm package before @importing its CSS. Never @import a remote URL (web fonts, CDN CSS): the
+ *   build resolves @import from the filesystem. Load those with a <link> in the head() of
+ *   src/routes/__root.tsx and name the family in a --font-* token in @theme inline below.
+ */
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system definition.
+ *
+ * The design lives in this file: oklch color tokens on the shadcn variables
+ * (--background, --foreground, --primary, --secondary, --muted, --accent, ...) plus
+ * new tokens as needed, font tokens, and custom styles and animations.
+ *
+ * The @theme inline block maps CSS custom properties to Tailwind utility
+ * classes (e.g. --color-primary -> bg-primary, text-primary).
+ *
+ * The :root and .dark blocks define the actual color values using oklch.
+ * All colors MUST use oklch format.
+ *
+ * To add a new semantic color:
+ * 1. Add the variable to :root (light value) and .dark (dark value)
+ * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 0.75rem;
+  --background: oklch(0.975 0.006 265);
+  --foreground: oklch(0.265 0.05 262);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.265 0.05 262);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.265 0.05 262);
+  --primary: oklch(0.457 0.215 277);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.955 0.012 270);
+  --secondary-foreground: oklch(0.265 0.05 262);
+  --muted: oklch(0.955 0.01 265);
+  --muted-foreground: oklch(0.5 0.03 262);
+  --accent: oklch(0.94 0.035 277);
+  --accent-foreground: oklch(0.4 0.19 277);
+  --destructive: oklch(0.55 0.2 25);
+  --destructive-foreground: oklch(0.99 0 0);
+  --success: oklch(0.52 0.13 155);
+  --success-soft: oklch(0.95 0.04 155);
+  --warning: oklch(0.55 0.13 65);
+  --warning-soft: oklch(0.96 0.05 80);
+  --border: oklch(0.915 0.012 265);
+  --input: oklch(0.88 0.015 265);
+  --ring: oklch(0.457 0.215 277);
+  --chart-1: oklch(0.457 0.215 277);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(1 0 0);
+  --sidebar-foreground: oklch(0.265 0.05 262);
+  --sidebar-primary: oklch(0.457 0.215 277);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.94 0.035 277);
+  --sidebar-accent-foreground: oklch(0.4 0.19 277);
+  --sidebar-border: oklch(0.915 0.012 265);
+  --sidebar-ring: oklch(0.457 0.215 277);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+}
+
+@layer base {
+  body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+  :focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; border-radius: 6px; }
+}
+@utility focus-ring { &:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; } }
+@utility skip-link {
+  position: absolute; left: 1rem; top: -4rem; z-index: 50; padding: .5rem .75rem; border-radius: .5rem;
+  background: var(--primary); color: var(--primary-foreground); font-size: .875rem;
+  &:focus { top: 1rem; }
+}
+@utility nav-item {
+  display: flex; align-items: center; gap: .75rem; padding: .55rem .75rem; border-radius: .6rem;
+  font-size: .875rem; font-weight: 500; color: var(--muted-foreground); transition: background .15s, color .15s;
+  &:hover { background: var(--muted); color: var(--foreground); }
+}
+@utility nav-item-active { background: var(--accent); color: var(--accent-foreground); &:hover { background: var(--accent); color: var(--accent-foreground); } }
+@utility tab-item {
+  display: flex; flex-direction: column; align-items: center; gap: 2px; padding: .5rem 0 .55rem;
+  font-size: 11px; font-weight: 500; color: var(--muted-foreground);
+}
+@utility tab-item-active { color: var(--primary); }
+@utility badge-count { min-width: 1.25rem; padding: 0 .35rem; border-radius: 999px; background: var(--primary); color: var(--primary-foreground); font-size: 11px; text-align: center; line-height: 1.25rem; }
+@utility badge-dot { position: absolute; top: 4px; right: 4px; min-width: 1.1rem; height: 1.1rem; padding: 0 .25rem; border-radius: 999px; background: var(--primary); color: var(--primary-foreground); font-size: 10px; font-weight: 600; display: grid; place-items: center; }
+@utility avatar { display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border-radius: 999px; background: var(--accent); color: var(--accent-foreground); font-size: .8rem; font-weight: 600; flex-shrink: 0; }
+@utility btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 2.5rem; padding: .5rem 1rem;
+  border-radius: .6rem; font-size: .875rem; font-weight: 500; transition: background .15s, opacity .15s;
+  &:disabled { opacity: .6; cursor: not-allowed; }
+}
+@utility btn-primary { background: var(--primary); color: var(--primary-foreground); &:hover:not(:disabled) { background: color-mix(in oklab, var(--primary) 88%, black); } }
+@utility btn-soft { background: var(--accent); color: var(--accent-foreground); &:hover { background: color-mix(in oklab, var(--accent) 85%, var(--primary)); } }
+@utility btn-ghost { background: transparent; color: var(--foreground); border: 1px solid var(--border); &:hover { background: var(--muted); } }
+@utility link { color: var(--primary); font-weight: 500; &:hover { text-decoration: underline; } }
+@utility pill { display: inline-flex; align-items: center; padding: .15rem .55rem; border-radius: 999px; font-size: 12px; font-weight: 500; white-space: nowrap; }
+@utility pill-info { background: var(--accent); color: var(--accent-foreground); }
+@utility pill-warn { background: var(--warning-soft); color: var(--warning); }
+@utility pill-ok { background: var(--success-soft); color: var(--success); }
+@utility pill-muted { background: var(--muted); color: var(--muted-foreground); }
+@utility field {
+  width: 100%; min-height: 2.6rem; padding: .5rem .75rem; border: 1px solid var(--input); border-radius: .6rem; background: var(--card); font-size: .9rem;
+  &:focus { outline: 2px solid var(--ring); outline-offset: 0; border-color: transparent; }
+  &[aria-invalid="true"] { border-color: var(--destructive); }
+}
